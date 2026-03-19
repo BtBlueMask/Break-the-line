@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     [Tooltip("Bullet Damage ")]
     [SerializeField] private float damage = 1f;
     [Tooltip("Bullet's lifetime")]
-    [SerializeField] private float lifetime = 3f;  
+    [SerializeField] private float lifetime = 3f;
 
     private void Awake()
     {
@@ -23,31 +23,32 @@ public class Projectile : MonoBehaviour
     {
         ShootHandler(transform.forward, speed);
 
-        
 
 
     }
 
     private void FixedUpdate()
     {
-        
+
     }
-    
+
+    #region ShootHandler sumamry
     /// <summary>
     /// CurrentDirection can be "transform.forward" or any direction you want to shoot the projectile towards, and speed is the speed of the projectile.
     /// </summary>
     /// <param name="CurrentDirection"></param>
     /// <param name="speed"></param>
-    private void ShootHandler(Vector3 CurrentDirection, float speed) 
+#endregion
+    private void ShootHandler(Vector3 CurrentDirection, float speed)
     {
         rb.AddForce(CurrentDirection * speed); //CurrentDirection is the transform
-       
-
-
-
-
-
+        Destroy(gameObject, lifetime); // Destroy the projectile after its lifetime expires
     }
+
+
+
+
+
 
 }
 
