@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 
     protected float moveSpeed;
 
-    
+    protected int damage;
 
     void Start()
     {
@@ -21,14 +21,11 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     //Checking to see if the enemy gets hit
     {
-        if (true)
+
+
+        if (health <= 0)
         {
-
-
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
     }
 }
