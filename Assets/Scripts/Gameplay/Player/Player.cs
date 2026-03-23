@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     //SerialzeFields
     [SerializeField] float _Speed = 1.0f;
     [SerializeField] float _AttackCooldown = 0.5f;
+    //Linked Prefabs
+    [SerializeField] GameObject _Projectile;
 
     //Input actions
     private InputAction fireAction;
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
 
         if (AttackIsPressed == 1.0f && _AttackCooldown <= 0)
         {
-            Debug.Log("bullet shot");
+            Instantiate(_Projectile, gameObject.transform.position, gameObject.transform.rotation);
             _AttackCooldown = 0.5f;
         }
         else
@@ -43,6 +45,4 @@ public class Player : MonoBehaviour
             _AttackCooldown -= Time.deltaTime;
         }
     }
-
-
 }
