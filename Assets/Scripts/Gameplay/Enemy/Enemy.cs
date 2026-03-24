@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     //Checking to see if the enemy gets hit
     {
         Projectile projectile = other.GetComponent<Projectile>();
