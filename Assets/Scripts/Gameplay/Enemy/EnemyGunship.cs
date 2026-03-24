@@ -4,16 +4,18 @@ public class EnemyGunship : Enemy
 {
     private void Awake()
     {
-        
+        health = 4;
+        moveSpeed = 1f;
+        damage = 1;
+
+
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
