@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,20 +14,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
     void Start()
     {
-      ResetGame();
+        RestartGame();
     }
 
-    
+
     void Update()
     {
-        
+
+
+
     }
 
-    private void UpdateRound()
+    private void UpdateRoundNumber()
     {
         _currentRound++;
         Debug.Log("Round: " + _currentRound);
@@ -35,25 +38,58 @@ public class GameManager : MonoBehaviour
     /// This method is used to update the score by adding the scoreToAdd parameter to the _currentScore variable and then logging the updated score to the console.
     /// </summary>
     /// <param name="scoreToAdd">This parameter is used to add score to the _currentScore</param>
+
+    #region Score save/load/update
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("HighScore", _currentScore);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadScore()
+    {
+        _currentScore = PlayerPrefs.GetInt("HighScore", 0);
+    }
     private void UpdateScore(int scoreToAdd)
     {
         _currentScore += scoreToAdd;
         Debug.Log("Score: " + _currentScore);
     }
+    #endregion
+
     /// <summary>
-    /// Resets the necessary vars to start a new game.
+    /// Resets the necessary needs to start a new game.
     /// </summary>
-    private void ResetGame()
+    private void RestartGame()
     {
-        //needs a scene id
+        MainScene();
         _currentScore = 0;
         _currentRound = 0;
         Debug.Log("Game Reset");
     }
 
-    private void Spawn ()
+    private void SpawnWave()
     {
-        //spawn logic
+        //Instantiate();
     }
+
+    #region Scenes
+    private void MenuScene()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
+    private void MainScene()
+    {
+       SceneManager.LoadScene("MainScene");
+    }
+
+    private void EndScene()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+    #endregion
+
+
 
 }
