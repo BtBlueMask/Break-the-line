@@ -21,11 +21,16 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     //Checking to see if the enemy gets hit
     {
-
-
-        if (health <= 0)
+        Projectile projectile = other.GetComponent<Projectile>();
+        if (Projectile)
         {
-            Destroy(gameObject);
+            health -= 1;
+
+            if (health <= 0)
+            {
+                //Instantiate a explosion effect
+                Destroy(gameObject);
+            }
         }
     }
 }
