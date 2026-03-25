@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Stinger : Enemy
@@ -9,11 +10,12 @@ public class Stinger : Enemy
     //End of Player simulation variables
 
     //Other test variables
-    private float RotationTime;
+    private float RotationTime = 5;
     private float RotationTimer = 0;
 
     private Quaternion TargetRotation;
     private Vector3 _startPosition;
+    private quaternion TargetDirection;
     private enum EPhase
     {
         Positioning = 0,
@@ -35,12 +37,22 @@ public class Stinger : Enemy
     {
         _startPosition = transform.position;
         //TargetRotation = Quaternion.Euler(); !! vector3 has to be a rotation that looks at the players position.
+        TargetDirection = FindLookDirection(PlayerPos);
     }
 
     void Update()
     {
         //float DeltaSpeed = moveSpeed * Time.deltaTime;
         //transform.position += -transform.forward * moveSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.Slerp(Quaternion.Euler(0,0,0), Quaternion.Euler(90,0,0), 0.2f);
+
+        //Update timers
+        RotationTimer += Time.deltaTime;
+        float percentage = RotationTimer / RotationTime;
+        transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, 0, 0), TargetDirection, percentage);
+    }
+
+    private Quaternion FindLookDirection(Vector3 PlayerPosition)
+    {
+        return Quaternion.LookRotation(PlayerPosition);
     }
 }
