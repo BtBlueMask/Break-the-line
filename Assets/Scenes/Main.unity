@@ -538,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _Speed: 20
   _AttackCooldown: 0.5
+  _Projectile: {fileID: 6731327242478059354, guid: ed63e5d5c8a89ea4d829a0bfff6cdaa2, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
