@@ -1,96 +1,63 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stinger : BaseEnemy
 {
-
-    //Player Simulation (Delete when merged)
-    private Vector3 PlayerPos = Vector3.zero;
-    //End of Player simulation variables
-
-    //Other test variables
-    private float RotationTime = 1;
-    private float MoveTime = 1;
-    private float MoveTimer = 0;
-
-    private Vector3 StartPosition;
-    private Vector3 EndPosition;
-
-    private Quaternion StartRotation;
-    private Quaternion TargetRotation;
-    private Quaternion TargetDirection;
-    private enum EPhase
+    private enum EPhases
     {
-        Positioning = 0,
-        Rotating,
-        Launching,
-    }
-    [SerializeField] private EPhase _Phase;
-
-
-
-    private void Awake()
-    {
-        
-        //Setting health
-        health = 2;
-        moveSpeed = 100f;
-        damage = 1;
+        init,
+        rotating,
+        moving
     }
 
-    void Start()
+    [SerializeField] private EPhases _Phase;
+
+    [SerializeField] private float _RotationDuration = 1f;
+    private float _rotationTimer = 0;
+    [SerializeField] private float _MoveSpeed;
+
+    private Quaternion _startRotation;
+    private Quaternion _targetRotation;
+
+
+    protected override void OnUpdate()
     {
-        //First phase movement variables
-        StartPosition = transform.position;
-        EndPosition = new Vector3(StartPosition.x, StartPosition.y, Random.Range(7f,9f));
-
-        //Second Phase movement variables
-        StartRotation = transform.rotation;
-    }
-
-    void Update()
-    {
-
-        if (_Phase == EPhase.Positioning)
+        if (_Phase == EPhases.init)
         {
-            float MovePercentage = MoveTimer / MoveTime;
-            transform.position = Vector3.Lerp(StartPosition,EndPosition, MovePercentage);
-            if (EndPosition == transform.position)
+            _rotationTimer = 0;
+
+            Vector3 RelativePosition = player.transform.position - transform.position;
+            _startRotation = transform.rotation;
+            _targetRotation = Quaternion.LookRotation(RelativePosition);
+
+            _Phase = EPhases.rotating;
+        }
+
+        if (_Phase == EPhases.rotating)
+        {
+            _rotationTimer += Time.deltaTime;
+            float percentage = _rotationTimer / _RotationDuration;
+            transform.rotation = Quaternion.Slerp(_startRotation, _targetRotation, percentage);
+            if (_rotationTimer >= _RotationDuration)
             {
-                MoveTimer = 0;
-                TargetDirection = FindLookDirection(PlayerPos);
-                _Phase = EPhase.Rotating;
+                transform.rotation = _targetRotation;
+                _Phase = EPhases.moving;
             }
+            return;
         }
 
-        //float DeltaSpeed = moveSpeed * Time.deltaTime;
-        //transform.position += -transform.forward * moveSpeed * Time.deltaTime;
-
-        //Update timers
-        MoveTimer += Time.deltaTime;
-
-
-        //Rotation logic
-        if (_Phase == EPhase.Rotating)
+        if (_Phase == EPhases.moving)
         {
-            float percentage = MoveTimer / RotationTime;
-            transform.rotation = Quaternion.Slerp(StartRotation, TargetDirection, percentage);
-            if (TargetDirection == transform.rotation)
-            {
-                _Phase = EPhase.Launching;
-            }
-        }
-
-        if (_Phase == EPhase.Launching)
-        {
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            transform.position += -transform.forward * _MoveSpeed * Time.deltaTime;
         }
     }
 
-    private Quaternion FindLookDirection(Vector3 PlayerPosition)
+    protected override void OnPlayerHit(Player player)
     {
-        Vector3 RelativePosition = PlayerPosition - transform.position;
-        return Quaternion.LookRotation(RelativePosition);
+        throw new System.NotImplementedException();
+    }
+
+    protected override void OnProjectiletHit(Projectile projectile)
+    {
+        throw new System.NotImplementedException();
     }
 }
