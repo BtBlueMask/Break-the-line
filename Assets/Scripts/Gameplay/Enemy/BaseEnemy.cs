@@ -34,7 +34,7 @@ public abstract class BaseEnemy : MonoBehaviour
         else
         {
             OnUpdate();
-            // Border Check
+            // TODO: Border Check
         }
     }
 
