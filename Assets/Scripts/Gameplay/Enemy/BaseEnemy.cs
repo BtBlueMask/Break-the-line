@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class BaseEnemy : MonoBehaviour
 {
-    protected int health;
-
-    protected float moveSpeed;
-
-    protected int damage;
+    [SerializeField] protected int health;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected int damage;
 
     void Start()
     {
@@ -19,7 +17,6 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    //Checking to see if the enemy gets hit
     {
 
 

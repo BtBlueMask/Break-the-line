@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Stinger : Enemy
+public class Stinger : BaseEnemy
 {
 
     //Player Simulation (Delete when merged)
