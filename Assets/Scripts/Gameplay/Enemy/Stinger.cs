@@ -10,7 +10,7 @@ public class Stinger : Enemy
     //End of Player simulation variables
 
     //Other test variables
-    private float RotationTime = 5;
+    private float RotationTime = 1;
     private float RotationTimer = 0;
 
     private Quaternion TargetRotation;
@@ -19,14 +19,16 @@ public class Stinger : Enemy
     private enum EPhase
     {
         Positioning = 0,
-        Rotating = 1,
-        Launching = 3
+        Rotating,
+        Launching,
     }
+    [SerializeField] private EPhase _phase;
 
 
 
     private void Awake()
     {
+        
         //Setting health
         health = 2;
         moveSpeed = 1f;
@@ -47,12 +49,15 @@ public class Stinger : Enemy
 
         //Update timers
         RotationTimer += Time.deltaTime;
+
+        //Rotation logic
         float percentage = RotationTimer / RotationTime;
         transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, 0, 0), TargetDirection, percentage);
     }
 
     private Quaternion FindLookDirection(Vector3 PlayerPosition)
     {
-        return Quaternion.LookRotation(PlayerPosition);
+        Vector3 RelativePosition = PlayerPosition - transform.position;
+        return Quaternion.LookRotation(RelativePosition);
     }
 }
