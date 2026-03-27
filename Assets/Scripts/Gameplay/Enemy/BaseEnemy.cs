@@ -8,7 +8,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [Header("Entry Parameters")]
     [SerializeField] private float entrySpeed;
-    [SerializeField] private float entryTargetY;
+    [SerializeField] private float entryTargetZ;
     private bool hasEntered = false;
 
     [SerializeField] private float borderBuffer;
@@ -22,13 +22,14 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         if (!hasEntered)
         {
-            if (transform.position.y < entryTargetY)
+            if (transform.position.z > entryTargetZ)
             {
                 OnEnterUpdate();
             }
             else
             {
                 hasEntered = true;
+                Debug.Log("Ship has entered the stage");
             }
         }
         else
@@ -82,6 +83,6 @@ public abstract class BaseEnemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(new Vector3(-10, 0, entryTargetY), new Vector3(10, 0, entryTargetY));
+        Gizmos.DrawLine(new Vector3(-10, 0, entryTargetZ), new Vector3(10, 0, entryTargetZ));
     }
 }
