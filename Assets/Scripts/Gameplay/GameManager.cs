@@ -1,9 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Enemy Prefabs")]
+    [Space]
+    [SerializeField] private GameObject _enemy1;
+    [SerializeField] private GameObject _enemy2;
+    [SerializeField] private GameObject _enemy3;
 
+    [SerializeField] List<Wave> _waves = new List<Wave>();
 
     [Header("Keeps track of")]
     [Space]
@@ -68,9 +75,23 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Reset");
     }
 
-    private void SpawnWave()
+    private void SpawnEnemy(GameObject currentEnemy)
     {
-        //Instantiate();
+        Instantiate(currentEnemy); 
+        Debug.Log("Enemy Spawned" + currentEnemy.name);
+    }
+
+    private void SpawnWave(Wave currentwave)
+    {
+        List<GameObject> enemiesToSpawn = currentwave.enemies;
+
+        for each enemy in currentwave.enemies
+        {
+            SpawnEnemy(enemy);
+        }
+        //SpawnEnemy(_enemy1);
+
+
     }
 
     #region Scenes
