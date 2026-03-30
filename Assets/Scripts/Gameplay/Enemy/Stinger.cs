@@ -12,7 +12,6 @@ public class Stinger : BaseEnemy
     [SerializeField] private EPhases _Phase;
 
     [SerializeField] private float _RotationDuration = 1f;
-    private float _rotationTimer = 0;
     [SerializeField] private float _MoveSpeed;
 
     private Quaternion _startRotation;
@@ -32,8 +31,6 @@ public class Stinger : BaseEnemy
     {
         if (_Phase == EPhases.init)
         {
-            _rotationTimer = 0;
-
             Vector3 RelativePosition = transform.position - player.transform.position; 
             _startRotation = transform.rotation;
             _targetRotation = Quaternion.LookRotation(RelativePosition);
@@ -43,7 +40,8 @@ public class Stinger : BaseEnemy
 
         if (_Phase == EPhases.rotating)
         {
-
+            Vector3 TargetDirection = (player.transform.position - transform.position).normalized;
+            float angle = Vector3.Angle(transform.forward, TargetDirection);
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, player.transform.position - transform.position , _rotationSpeed, 0f);
 
             transform.rotation = Quaternion.LookRotation(newDirection);
@@ -56,6 +54,14 @@ public class Stinger : BaseEnemy
             //    transform.rotation = _targetRotation;
             //    _Phase = EPhases.moving;
             //}
+
+            
+
+            if (angle < 1f)
+            {
+                Debug.Log("rotating ended");
+                _Phase = EPhases.moving;
+            }
             return;
         }
 
@@ -67,7 +73,7 @@ public class Stinger : BaseEnemy
 
     protected override void OnPlayerHit(Player player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("The player was hit");
     }
 
     protected override void OnProjectiletHit(Projectile projectile)
