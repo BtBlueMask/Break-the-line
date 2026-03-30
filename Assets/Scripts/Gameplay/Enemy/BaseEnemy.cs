@@ -13,7 +13,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [SerializeField] private float borderBuffer;
 
-    private void Start()
+    virtual protected void Start()
     {
         player = FindFirstObjectByType<Player>();
     }

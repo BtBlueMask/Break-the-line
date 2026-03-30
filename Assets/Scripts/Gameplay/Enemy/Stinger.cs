@@ -18,14 +18,23 @@ public class Stinger : BaseEnemy
     private Quaternion _startRotation;
     private Quaternion _targetRotation;
 
+    [SerializeField] float _rotationSpeed;
 
+    override protected void Start()
+    {
+        base.Start();
+        
+        Quaternion temp = transform.rotation;
+        temp.y = 180f;
+        transform.rotation = temp; 
+    }
     protected override void OnUpdate()
     {
         if (_Phase == EPhases.init)
         {
             _rotationTimer = 0;
 
-            Vector3 RelativePosition = player.transform.position - transform.position;
+            Vector3 RelativePosition = transform.position - player.transform.position; 
             _startRotation = transform.rotation;
             _targetRotation = Quaternion.LookRotation(RelativePosition);
 
@@ -34,14 +43,19 @@ public class Stinger : BaseEnemy
 
         if (_Phase == EPhases.rotating)
         {
-            _rotationTimer += Time.deltaTime;
-            float percentage = _rotationTimer / _RotationDuration;
-            transform.rotation = Quaternion.Slerp(_startRotation, _targetRotation, percentage);
-            if (_rotationTimer >= _RotationDuration)
-            {
-                transform.rotation = _targetRotation;
-                _Phase = EPhases.moving;
-            }
+
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, player.transform.position - transform.position , _rotationSpeed, 0f);
+
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+            //_rotationTimer += Time.deltaTime;
+            //float percentage = _rotationTimer / _RotationDuration;
+            //transform.rotation = Quaternion.Slerp(_startRotation,Quaternion.Euler(0, _targetRotation.y, 0) , percentage);
+            //if (_rotationTimer >= _RotationDuration)
+            //{
+            //    transform.rotation = _targetRotation;
+            //    _Phase = EPhases.moving;
+            //}
             return;
         }
 
