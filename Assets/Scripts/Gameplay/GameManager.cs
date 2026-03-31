@@ -70,9 +70,14 @@ public class GameManager : MonoBehaviour
     private void RestartGame()
     {
         MainScene();
+        ResetRoundAndScore();
+        Debug.Log("Game Reset");
+    }
+
+    private void ResetRoundAndScore()
+    {
         _currentScore = 0;
         _currentRound = 0;
-        Debug.Log("Game Reset");
     }
 
     private void SpawnEnemy(GameObject currentEnemy)
@@ -85,13 +90,10 @@ public class GameManager : MonoBehaviour
     {
         List<GameObject> enemiesToSpawn = currentwave.enemies;
 
-        for each enemy in currentwave.enemies
+        foreach (GameObject enemy in currentwave.enemies)
         {
             SpawnEnemy(enemy);
         }
-        //SpawnEnemy(_enemy1);
-
-
     }
 
     #region Scenes
