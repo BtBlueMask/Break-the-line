@@ -1,23 +1,49 @@
+using System.Transactions;
 using UnityEngine;
 
-public class EnemyGunship : Enemy
+public class EnemyGunship : BaseEnemy
 {
-    private void Awake()
+    //States
+    private enum EPhases
     {
-        health = 4;
-        moveSpeed = 1f;
-        damage = 1;
+        init,
+        rotating,
+        moving
+    }
 
+    [SerializeField] private EPhases _Phase;
+
+    //Player tracking related
+    Transform PlayerTransform;
+
+    //Enemy Shooting related
+    [SerializeField] float _ShootingCD;
+    float ShootTimer;
+
+
+    protected override void Start()
+    {
+        base.Start();
+        PlayerTransform = player.transform;
 
     }
 
-    void Start()
+    protected override void OnUpdate()
     {
-        
+        ShootTimer += Time.deltaTime;
+        if (ShootTimer >= _ShootingCD)
+        {
+            //Instantiate('bullet type for enemy');
+        }
     }
 
-    void Update()
+    protected override void OnPlayerHit(Player player)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    protected override void OnProjectiletHit(Projectile projectile)
+    {
+        throw new System.NotImplementedException();
     }
 }
