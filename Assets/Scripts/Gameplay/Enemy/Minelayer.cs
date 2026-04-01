@@ -6,7 +6,7 @@ public class Minelayer : BaseEnemy
     [SerializeField] Transform mineSpawner;
 
     [SerializeField] private float mineDeployCooldownMax;
-    [SerializeField]private float mineDeployCooldown = 0f;
+    [SerializeField]private float mineDeployCooldownCurrent = 0f;
     
     [SerializeField] private float moveSpeed;
 
@@ -19,11 +19,11 @@ public class Minelayer : BaseEnemy
     {
         transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
 
-        mineDeployCooldown -= Time.deltaTime;
-        if (mineDeployCooldown <= 0)
+        mineDeployCooldownCurrent -= Time.deltaTime;
+        if (mineDeployCooldownCurrent <= 0)
         {
             Instantiate(mine, mineSpawner.position, mineSpawner.rotation);
-            mineDeployCooldown = mineDeployCooldownMax;
+            mineDeployCooldownCurrent = mineDeployCooldownMax;
         }
     }
 
