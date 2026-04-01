@@ -3,9 +3,19 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+
+    //Player State
+    private enum EPlayerPhase
+    {
+        Alive,
+        Dead
+    }
+    [SerializeField] private EPlayerPhase _PlayerPhase;
+
     //SerialzeFields
     [SerializeField] float _Speed = 1.0f;
     [SerializeField] float _AttackCooldown = 0.5f;
+    [SerializeField] int _Lifes = 3;
     //Linked Prefabs
     [SerializeField] GameObject _Projectile;
 
@@ -28,6 +38,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (_Lifes > 0) { PlayerUpdate(); }
+        else if (_PlayerPhase == EPlayerPhase.Alive)
+        {
+            OnDeath();
+            _PlayerPhase = EPlayerPhase.Dead;
+        }
+    }
+
+    protected void PlayerUpdate()
+    {
         AttackIsPressed = fireAction.ReadValue<float>();
         Vector2 temp = moveAction.ReadValue<Vector2>();
         Vector3 input = new Vector3(temp.x, 0f, temp.y);
@@ -44,5 +64,15 @@ public class Player : MonoBehaviour
         {
             _AttackCooldown -= Time.deltaTime;
         }
+    }
+
+    private void OnDeath()
+    {
+        print("player died");
+    }
+
+    public void OnPlayerDamaged(int damage)
+    {
+        _Lifes -= damage;
     }
 }
