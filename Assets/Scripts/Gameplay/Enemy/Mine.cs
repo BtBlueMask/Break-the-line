@@ -7,8 +7,9 @@ public class Mine : BaseEnemy
     [SerializeField] private float moveSpeed;
     private float directionDeviation;
 
-    [SerializeField] private float rotationDecider;
-    private float rotationDirection;
+    private float rotationDecider;
+    [SerializeField] private float rotationDirection;
+    [SerializeField] private float rotationSpeed;
 
     [SerializeField] private float blastRadius;
 
@@ -18,8 +19,8 @@ public class Mine : BaseEnemy
 
         directionDeviation = Random.Range(-0.5f, 0.5f);
 
-        rotationDecider = Random.Range(0, 1);
-        if (rotationDecider <= 0.5f)
+        rotationDecider = Random.Range(0, 2);
+        if (rotationDecider >= 0.5f)
         {
             rotationDirection = -1;
         }
@@ -32,7 +33,9 @@ public class Mine : BaseEnemy
     protected override void OnUpdate()
     {
         transform.position += new Vector3(directionDeviation, 0, 1) * moveSpeed * Time.deltaTime;
-        //transform.rotation = Quaternion.Euler(0, rotationDirection * moveSpeed * Time.deltaTime, 0);
+
+        transform.Rotate(new Vector3(0,rotationDirection * rotationSpeed * Time.deltaTime, 0));
+
     }
 
     protected override void OnPlayerHit(Player player)
