@@ -4,13 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Enemy Prefabs")]
-    [Space]
-    [SerializeField] private GameObject _enemy1;
-    [SerializeField] private GameObject _enemy2;
-    [SerializeField] private GameObject _enemy3;
+    
 
     [SerializeField] List<Wave> _waves = new List<Wave>();
+    [SerializeField] List<GameObject> _currentEnemies = new List<GameObject>();
 
     [Header("Keeps track of")]
     [Space]
@@ -81,46 +78,45 @@ public class GameManager : MonoBehaviour
     {
         SaveScore();
         LoadScore();
-        MainScene();
+        MainScene(); 
+        if (_currentEnemies.Count == 0)
+        {
+            UpdateRoundNumber();
+            SpawnWave(_waves[_currentRound]);
+        }
         ResetRoundAndScore();
         Debug.Log("Game Reset");
     }
 
     #region Enemy Spawning
+    private void SpawnWave(Wave currentwave)
+    {
+        for (int i = 0; i < currentwave.enemies.Count; i++)
+        
+        {
+            SpawnEnemy(currentwave.enemies[i], currentwave.enemyLocations[i]);
+        }
+    }
 
-    private void SpawnEnemies()
+    private void SpawnEnemy(GameObject currentEnemy, Vector3 offset)
     {
-        if (_currentRound < _maxRounds)
-        {
-            Wave currentWave = _waves[_currentRound];
-            SpawnWave(currentWave);
-            UpdateRoundNumber();
-        }
-        else
-        {
-            Debug.Log("Max rounds reached. Ending game.");
-            EndScene();
-        }
-    }
-    private void SpawnEnemy(GameObject currentEnemy)
-    {
-        Instantiate(currentEnemy);
+        GameObject go = Instantiate(currentEnemy);
+        _currentEnemies.Add(go);
+        go.transform.position = transform.position + offset;
         Debug.Log("Enemy Spawned" + currentEnemy.name);
+
     }
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="currentwave">Local variable of the wave script</param>
-    private void SpawnWave(Wave currentwave)
-    {
-        List<GameObject> enemiesToSpawn = currentwave.enemies;
-
-        foreach (GameObject enemy in enemiesToSpawn)
-        {
-            SpawnEnemy(enemy);
-        }
-    }
     #endregion
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        _currentEnemies.Remove(enemy);
+    }
 
     #region Scenes
     private void MenuScene()

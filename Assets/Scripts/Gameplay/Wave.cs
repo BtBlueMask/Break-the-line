@@ -6,7 +6,5 @@ using UnityEngine;
 public class Wave : ScriptableObject
 {
     [SerializeField] public List<GameObject> enemies;
-
-
-
+    [SerializeField] public List<Vector3> enemyLocations;
 }
