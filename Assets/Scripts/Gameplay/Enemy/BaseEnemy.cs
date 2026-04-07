@@ -13,8 +13,25 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [SerializeField] private float borderBuffer;
 
+    #region Border
+    protected float minX;
+    protected float maxX;
+    protected float minZ;
+    protected float maxZ;
+    #endregion
+
     virtual protected void Start()
     {
+        #region Border
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 20));
+
+        minX = bottomLeft.x;
+        maxX = topRight.x;
+        minZ = bottomLeft.z;
+        maxZ = topRight.z;
+        #endregion
+
         player = FindFirstObjectByType<Player>();
     }
 
@@ -35,7 +52,7 @@ public abstract class BaseEnemy : MonoBehaviour
         else
         {
             OnUpdate();
-            // TODO: Border Check
+            BorderCheck();
         }
     }
 
@@ -59,6 +76,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if (projectile != null)
         {
             OnProjectiletHit(projectile);
+            Debug.Log("Projectile hit the enemy.");
         }
     }
 
@@ -70,13 +88,17 @@ public abstract class BaseEnemy : MonoBehaviour
     /// <summary>
     /// Is called when the enemy hits a player-projectile
     /// </summary>
-    protected abstract void OnProjectiletHit(Projectile projectile);
+    protected virtual void OnProjectiletHit(Projectile projectile)
+    {
+        OnDeath();
+    }
 
     /// <summary>
     /// Is called when the enemy should be destroyed
     /// </summary>
     protected virtual void OnDeath()
     {
+        //gamemanager.RemoveEnemy
         Destroy(gameObject);
     }
 
@@ -85,4 +107,19 @@ public abstract class BaseEnemy : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(new Vector3(-10, 0, entryTargetZ), new Vector3(10, 0, entryTargetZ));
     }
+
+    #region Border
+    private void BorderCheck()
+    {
+        Vector3 pos = transform.position;
+
+        if (pos.x < minX) {OnDeath();}
+        else if (pos.x > maxX) { OnDeath();}
+        if (pos.z < minZ) { OnDeath();}
+        else if (pos.z > maxZ) {OnDeath();}
+
+        transform.position = pos;
+    }
+    #endregion
+
 }

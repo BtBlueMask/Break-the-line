@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Stinger : BaseEnemy
@@ -55,8 +56,6 @@ public class Stinger : BaseEnemy
             //    _Phase = EPhases.moving;
             //}
 
-            
-
             if (angle < 1f)
             {
                 Debug.Log("rotating ended");
@@ -73,11 +72,11 @@ public class Stinger : BaseEnemy
 
     protected override void OnPlayerHit(Player player)
     {
-        Debug.Log("The player was hit");
+        player.OnPlayerDamaged(1);
     }
 
     protected override void OnProjectiletHit(Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        base.OnProjectiletHit(projectile);
     }
 }

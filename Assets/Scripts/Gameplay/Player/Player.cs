@@ -1,11 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.LightTransport;
 
 public class Player : MonoBehaviour
 {
+
+    //Player State
+    private enum EPlayerPhase
+    {
+        Alive,
+        Dead
+    }
+    [SerializeField] private EPlayerPhase _PlayerPhase;
+
     //SerialzeFields
     [SerializeField] float _Speed = 1.0f;
     [SerializeField] float _AttackCooldown = 0.5f;
+    [SerializeField] int _Lifes = 3;
     //Linked Prefabs
     [SerializeField] GameObject _Projectile;
 
@@ -16,10 +27,26 @@ public class Player : MonoBehaviour
 
     private Vector3 movement;
 
-    
+    #region Border
+    protected float minX;
+    protected float maxX;
+    protected float minZ;
+    protected float maxZ;
+    #endregion
+
 
     void Start()
     {
+        #region Border
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 20));
+
+        minX = bottomLeft.x;
+        maxX = topRight.x;
+        minZ = bottomLeft.z;
+        maxZ = topRight.z;
+        #endregion
+
         fireAction = InputSystem.actions.FindAction("Attack");
         moveAction = InputSystem.actions.FindAction("Move");
     }
@@ -27,6 +54,16 @@ public class Player : MonoBehaviour
 
 
     void Update()
+    {
+        if (_Lifes > 0) { PlayerUpdate(); }
+        else if (_PlayerPhase == EPlayerPhase.Alive)
+        {
+            OnDeath();
+            _PlayerPhase = EPlayerPhase.Dead;
+        }
+    }
+
+    protected void PlayerUpdate()
     {
         AttackIsPressed = fireAction.ReadValue<float>();
         Vector2 temp = moveAction.ReadValue<Vector2>();
@@ -44,5 +81,31 @@ public class Player : MonoBehaviour
         {
             _AttackCooldown -= Time.deltaTime;
         }
+        BorderCheck();
     }
+
+    private void OnDeath()
+    {
+        print("player died");
+    }
+
+    public void OnPlayerDamaged(int damage)
+    {
+        _Lifes -= damage;
+    }
+
+    #region Border
+    private void BorderCheck()
+    {
+        Vector3 pos = transform.position;
+
+        if (pos.x < minX) { pos.x = minX;}
+        else if (pos.x > maxX) { pos.x = maxX;}
+        if (pos.z < minZ) { pos.z = minZ; }
+        else if (pos.z > maxZ) { pos.z = maxZ;}
+
+        transform.position = pos;
+    }
+    #endregion
+
 }

@@ -40,5 +40,13 @@ public class Projectile : MonoBehaviour
         rb.AddForce(CurrentDirection * speed); //CurrentDirection is the transform
         Destroy(gameObject, lifetime); // Destroy the projectile after its lifetime expires
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<BaseEnemy>())
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
