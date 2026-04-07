@@ -75,4 +75,12 @@ public class Player : MonoBehaviour
     {
         _Lifes -= damage;
     }
+
+    #region Border
+    private void BorderCheck()
+    {
+        
+    }
+    #endregion
+
 }

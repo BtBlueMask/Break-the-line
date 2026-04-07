@@ -77,6 +77,6 @@ public class Stinger : BaseEnemy
 
     protected override void OnProjectiletHit(Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        base.OnProjectiletHit(projectile);
     }
 }

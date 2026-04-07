@@ -59,6 +59,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if (projectile != null)
         {
             OnProjectiletHit(projectile);
+            Debug.Log("Projectile hit the enemy.");
         }
     }
 
@@ -70,13 +71,17 @@ public abstract class BaseEnemy : MonoBehaviour
     /// <summary>
     /// Is called when the enemy hits a player-projectile
     /// </summary>
-    protected abstract void OnProjectiletHit(Projectile projectile);
+    protected virtual void OnProjectiletHit(Projectile projectile)
+    {
+        OnDeath();
+    }
 
     /// <summary>
     /// Is called when the enemy should be destroyed
     /// </summary>
     protected virtual void OnDeath()
     {
+        //gamemanager.RemoveEnemy
         Destroy(gameObject);
     }
 
