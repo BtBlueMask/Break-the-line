@@ -52,7 +52,7 @@ public abstract class BaseEnemy : MonoBehaviour
         else
         {
             OnUpdate();
-            // TODO: Border Check
+            BorderCheck();
         }
     }
 
@@ -113,10 +113,10 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         Vector3 pos = transform.position;
 
-        if (pos.x < minX) { pos.x = minX; }
-        else if (pos.x > maxX) { pos.x = maxX; }
-        if (pos.z < minZ) { pos.z = minZ; }
-        else if (pos.z > maxZ) { pos.z = maxZ; }
+        if (pos.x < minX) {OnDeath();}
+        else if (pos.x > maxX) { OnDeath();}
+        if (pos.z < minZ) { OnDeath();}
+        else if (pos.z > maxZ) {OnDeath();}
 
         transform.position = pos;
     }
