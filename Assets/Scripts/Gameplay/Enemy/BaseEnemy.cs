@@ -13,8 +13,25 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [SerializeField] private float borderBuffer;
 
+    #region Border
+    protected float minX;
+    protected float maxX;
+    protected float minZ;
+    protected float maxZ;
+    #endregion
+
     virtual protected void Start()
     {
+        #region Border
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 20));
+
+        minX = bottomLeft.x;
+        maxX = topRight.x;
+        minZ = bottomLeft.z;
+        maxZ = topRight.z;
+        #endregion
+
         player = FindFirstObjectByType<Player>();
     }
 
@@ -90,4 +107,19 @@ public abstract class BaseEnemy : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(new Vector3(-10, 0, entryTargetZ), new Vector3(10, 0, entryTargetZ));
     }
+
+    #region Border
+    private void BorderCheck()
+    {
+        Vector3 pos = transform.position;
+
+        if (pos.x < minX) { pos.x = minX; }
+        else if (pos.x > maxX) { pos.x = maxX; }
+        if (pos.z < minZ) { pos.z = minZ; }
+        else if (pos.z > maxZ) { pos.z = maxZ; }
+
+        transform.position = pos;
+    }
+    #endregion
+
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.LightTransport;
 
 public class Player : MonoBehaviour
 {
@@ -26,10 +27,26 @@ public class Player : MonoBehaviour
 
     private Vector3 movement;
 
-    
+    #region Border
+    protected float minX;
+    protected float maxX;
+    protected float minZ;
+    protected float maxZ;
+    #endregion
+
 
     void Start()
     {
+        #region Border
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 20));
+
+        minX = bottomLeft.x;
+        maxX = topRight.x;
+        minZ = bottomLeft.z;
+        maxZ = topRight.z;
+        #endregion
+
         fireAction = InputSystem.actions.FindAction("Attack");
         moveAction = InputSystem.actions.FindAction("Move");
     }
@@ -64,6 +81,7 @@ public class Player : MonoBehaviour
         {
             _AttackCooldown -= Time.deltaTime;
         }
+        BorderCheck();
     }
 
     private void OnDeath()
@@ -79,7 +97,14 @@ public class Player : MonoBehaviour
     #region Border
     private void BorderCheck()
     {
-        
+        Vector3 pos = transform.position;
+
+        if (pos.x < minX) { pos.x = minX;}
+        else if (pos.x > maxX) { pos.x = maxX;}
+        if (pos.z < minZ) { pos.z = minZ; }
+        else if (pos.z > maxZ) { pos.z = maxZ;}
+
+        transform.position = pos;
     }
     #endregion
 
