@@ -6,6 +6,12 @@ public class EnemyGunship : BaseEnemy
     [SerializeField] private float _ShootingCD;
     private float ShootTimer;
 
+    [SerializeField] private GameObject enemyBullet;
+
+    [SerializeField] private Transform gun1;
+    [SerializeField] private Transform gun2;
+    private int preparedGun = 0;
+
     //Enemy movement related
     private float moveDirectionDecider;
     [SerializeField] private float moveDirection;
@@ -29,15 +35,25 @@ public class EnemyGunship : BaseEnemy
     protected override void OnUpdate()
     {
         transform.position += new Vector3(moveDirection * moveSpeed * Time.deltaTime, 0, 0);
-        //if (/* Check if enemy gets too close to border */)
-        //{
-        //    moveDirection = moveDirection * -1;
-        //}
+        if (transform.position.x >= maxX - borderBuffer || transform.position.x <= minX + borderBuffer)
+        {
+            moveDirection = moveDirection * -1;
+        }
 
         ShootTimer += Time.deltaTime;
         if (ShootTimer >= _ShootingCD)
         {
-            //Instantiate('bullet type for enemy');
+            ShootTimer = 0;
+            if (preparedGun == 0)
+            {
+                Instantiate(enemyBullet, gun1.position, gun1.rotation);
+                preparedGun = 1;
+            }
+            else if (preparedGun == 1)
+            {
+                Instantiate(enemyBullet, gun2.position, gun2.rotation);
+                preparedGun = 0;
+            }
         }
     }
 

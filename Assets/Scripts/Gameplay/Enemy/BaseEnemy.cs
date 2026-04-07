@@ -11,7 +11,7 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] private float entryTargetZ;
     private bool hasEntered = false;
 
-    [SerializeField] private float borderBuffer;
+    [SerializeField] protected float borderBuffer;
 
     #region Border
     protected float minX;

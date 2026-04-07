@@ -536,8 +536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c23c660ab12c04c98ee8e1a8f5a828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  _PlayerPhase: 0
   _Speed: 20
   _AttackCooldown: 0.5
+  _Lifes: 3
   _Projectile: {fileID: 6731327242478059354, guid: ed63e5d5c8a89ea4d829a0bfff6cdaa2, type: 3}
 --- !u!1 &832575517
 GameObject:
@@ -588,124 +590,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1018051531
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.5894964
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0000000606901
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 30.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084390818932683046, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_Name
-      value: Gunship (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
---- !u!1001 &1676306691
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 183236065419056961, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: entryTargetZ
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 20.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2989849009454610754, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084390818932683046, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
-      propertyPath: m_Name
-      value: Gunship
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f8ca8cface6809b4da4aed701558b0b0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -714,5 +598,3 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 511142568}
-  - {fileID: 1676306691}
-  - {fileID: 1018051531}
