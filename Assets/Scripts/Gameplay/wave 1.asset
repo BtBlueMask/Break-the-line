@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: wave 1
   m_EditorClassIdentifier: Assembly-CSharp::Wave
   enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemyLocations: []
+  - {fileID: 8457835465584459111, guid: f4a37c2771feda141a87979129a2a4cf, type: 3}
+  - {fileID: 8457835465584459111, guid: f4a37c2771feda141a87979129a2a4cf, type: 3}
+  - {fileID: 8457835465584459111, guid: f4a37c2771feda141a87979129a2a4cf, type: 3}
+  enemyLocations:
+  - {x: 0, y: 0, z: 9}
+  - {x: 0, y: 0, z: 9}
+  - {x: 0, y: 0, z: 9}
