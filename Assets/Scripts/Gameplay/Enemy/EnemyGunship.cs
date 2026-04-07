@@ -2,33 +2,38 @@ using UnityEngine;
 
 public class EnemyGunship : BaseEnemy
 {
-    //States
-    private enum EPhases
-    {
-        init,
-        rotating,
-        moving
-    }
-
-    [SerializeField] private EPhases _Phase;
-
-    //Player tracking related
-    Transform PlayerTransform;
-
     //Enemy Shooting related
-    [SerializeField] float _ShootingCD;
-    float ShootTimer;
+    [SerializeField] private float _ShootingCD;
+    private float ShootTimer;
 
+    //Enemy movement related
+    private float moveDirectionDecider;
+    [SerializeField] private float moveDirection;
+    [SerializeField] private float moveSpeed;
 
     protected override void Start()
     {
         base.Start();
-        PlayerTransform = player.transform;
 
+        moveDirectionDecider = Random.Range(0, 2);
+        if (moveDirectionDecider >= 0.5)
+        {
+            moveDirection = 1;
+        }
+        else
+        {
+            moveDirection = -1;
+        }
     }
 
     protected override void OnUpdate()
     {
+        transform.position += new Vector3(moveDirection * moveSpeed * Time.deltaTime, 0, 0);
+        //if (/* Check if enemy gets too close to border */)
+        //{
+        //    moveDirection = moveDirection * -1;
+        //}
+
         ShootTimer += Time.deltaTime;
         if (ShootTimer >= _ShootingCD)
         {
@@ -38,11 +43,11 @@ public class EnemyGunship : BaseEnemy
 
     protected override void OnPlayerHit(Player player)
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
     protected override void OnProjectiletHit(Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 }
