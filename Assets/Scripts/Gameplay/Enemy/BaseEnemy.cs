@@ -32,7 +32,7 @@ public abstract class BaseEnemy : MonoBehaviour
         minZ = bottomLeft.z;
         maxZ = topRight.z;
         #endregion
-
+        entryTargetZ = Random.Range(7f, 10f);
         player = FindFirstObjectByType<Player>();
         manager = FindAnyObjectByType<GameManager>();
     }
@@ -101,6 +101,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void OnDeath()
     {
         manager.RemoveEnemy(gameObject);
+        Debug.Log("enemy died");
         Destroy(gameObject);
     }
 
