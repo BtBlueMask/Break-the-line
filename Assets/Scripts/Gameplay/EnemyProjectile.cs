@@ -13,9 +13,12 @@ public class EnemyProjectile : MonoBehaviour
     [Tooltip("Bullet's lifetime")]
     [SerializeField] private int lifetime = 3;
 
+    private GameObject player;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        player = FindFirstObjectByType<Player>();
     }
 
 
@@ -39,6 +42,15 @@ public class EnemyProjectile : MonoBehaviour
     {
         rb.AddForce(CurrentDirection * speed); //CurrentDirection is the transform
         Destroy(gameObject, lifetime); // Destroy the projectile after its lifetime expires
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Player>())
+        {
+            
+            Destroy(gameObject);
+        }
     }
 }
 
