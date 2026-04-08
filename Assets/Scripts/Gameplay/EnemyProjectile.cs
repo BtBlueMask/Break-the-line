@@ -13,7 +13,7 @@ public class EnemyProjectile : MonoBehaviour
     [Tooltip("Bullet's lifetime")]
     [SerializeField] private int lifetime = 3;
 
-    private GameObject player;
+    private Player player;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (other.GetComponent<Player>())
         {
-            
+            player.OnPlayerDamaged(damage);
             Destroy(gameObject);
         }
     }
