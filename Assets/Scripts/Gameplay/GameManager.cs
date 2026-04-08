@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     /// <param name="scoreToAdd">This parameter is used to add score to the _currentScore</param>
 
     #region Score save/load/update/reset
-    private void SaveScore()
+    public void SaveScore()
     {
         if (_currentScore > _highScore)
         {

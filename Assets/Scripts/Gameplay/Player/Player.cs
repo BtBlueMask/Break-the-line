@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
     //Player State
     private enum EPlayerPhase
     {
@@ -34,9 +33,14 @@ public class Player : MonoBehaviour
     protected float maxZ;
     #endregion
 
+    private GameManager gameManager;
+    private SceneHanler sceneHanler;
 
     void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
+        sceneHanler = FindAnyObjectByType<SceneHanler>();
+
         #region Border
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 20));
@@ -87,6 +91,8 @@ public class Player : MonoBehaviour
     private void OnDeath()
     {
         print("player died");
+        gameManager.SaveScore();
+        sceneHanler.LoadgameOver();
     }
 
     public void OnPlayerDamaged(int damage)
