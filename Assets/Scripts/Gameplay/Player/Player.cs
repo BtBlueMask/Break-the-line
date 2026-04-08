@@ -36,8 +36,11 @@ public class Player : MonoBehaviour
     private GameManager gameManager;
     private SceneHanler sceneHanler;
 
+    private HealthUI healthUI;
+
     void Start()
     {
+        healthUI = FindFirstObjectByType<HealthUI>();
         gameManager = FindAnyObjectByType<GameManager>();
         sceneHanler = FindAnyObjectByType<SceneHanler>();
 
@@ -98,6 +101,7 @@ public class Player : MonoBehaviour
     public void OnPlayerDamaged(int damage)
     {
         _Lifes -= damage;
+        healthUI.onHealthChanged(_Lifes);
     }
 
     #region Border
