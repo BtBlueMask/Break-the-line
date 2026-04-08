@@ -9,11 +9,17 @@ public class SceneHanler : MonoBehaviour
     Gameplay: "Main"
     Menu: "Menu"
     Game over: "End"
+
+    !! NOTE 
+
+    OnQuit is de functie om de application af te sluiten.
+
     */
     #endregion
 
     public void LoadGameplay()
     {
+        Debug.Log("gameplayPressed");
         SceneManager.LoadScene("Main");
     }
 
@@ -25,6 +31,11 @@ public class SceneHanler : MonoBehaviour
     public void LoadgameOver()
     {
         SceneManager.LoadScene("End");
+    }
+
+    public void OnQuit()
+    {
+        Application.Quit();
     }
 
 }
