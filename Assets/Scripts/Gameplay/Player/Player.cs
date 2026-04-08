@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] int _Lifes = 3;
     //Linked Prefabs
     [SerializeField] GameObject _Projectile;
+    [SerializeField] Transform _BulletSpawner;
 
     //Input actions
     private InputAction fireAction;
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
 
         if (AttackIsPressed == 1.0f && _AttackCooldown <= 0)
         {
-            Instantiate(_Projectile, gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(_Projectile, _BulletSpawner.position, _BulletSpawner.rotation);
             _AttackCooldown = 0.5f;
         }
         else
