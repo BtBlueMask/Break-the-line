@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class BaseEnemy : MonoBehaviour
 {
     protected Player player;
+    protected GameManager manager;
 
     [SerializeField] protected int damage;
 
@@ -33,6 +34,7 @@ public abstract class BaseEnemy : MonoBehaviour
         #endregion
 
         player = FindFirstObjectByType<Player>();
+        manager = FindAnyObjectByType<GameManager>();
     }
 
     protected void Update()
@@ -98,7 +100,7 @@ public abstract class BaseEnemy : MonoBehaviour
     /// </summary>
     protected virtual void OnDeath()
     {
-        //gamemanager.RemoveEnemy
+        manager.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
 
