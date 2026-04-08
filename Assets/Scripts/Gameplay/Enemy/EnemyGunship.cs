@@ -60,11 +60,11 @@ public class EnemyGunship : BaseEnemy
     protected override void OnPlayerHit(Player player)
     {
         player.OnPlayerDamaged(damage);
-        Destroy(gameObject);
+        OnDeath();
     }
 
     protected override void OnProjectiletHit(Projectile projectile)
     {
-        Destroy(gameObject);
+        OnDeath();
     }
 }
