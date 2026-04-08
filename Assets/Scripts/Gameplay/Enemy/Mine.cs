@@ -41,6 +41,7 @@ public class Mine : BaseEnemy
     protected override void OnPlayerHit(Player player)
     {
         Debug.Log("The player was hit");
+        player.OnPlayerDamaged(damage);
         MineExplode();
         OnDeath();
     }

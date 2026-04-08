@@ -59,6 +59,7 @@ public class EnemyGunship : BaseEnemy
 
     protected override void OnPlayerHit(Player player)
     {
+        player.OnPlayerDamaged(damage);
         Destroy(gameObject);
     }
 

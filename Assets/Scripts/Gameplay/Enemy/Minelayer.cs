@@ -30,6 +30,7 @@ public class Minelayer : BaseEnemy
     protected override void OnPlayerHit(Player player)
     {
         Debug.Log("The player was hit");
+        player.OnPlayerDamaged(damage);
         OnDeath();
     }
 
