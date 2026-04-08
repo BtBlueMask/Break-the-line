@@ -15,8 +15,6 @@ MonoBehaviour:
   enemies:
   - {fileID: 6796894688514077843, guid: 4696759c8081b4a46afc15b3a59e125d, type: 3}
   - {fileID: 6796894688514077843, guid: 4696759c8081b4a46afc15b3a59e125d, type: 3}
-  - {fileID: 8457835465584459111, guid: f4a37c2771feda141a87979129a2a4cf, type: 3}
   enemyLocations:
-  - {x: 4, y: 0, z: 9}
-  - {x: 0, y: 0, z: 9}
-  - {x: 0, y: 0, z: 9}
+  - {x: 5, y: 0, z: 20}
+  - {x: -5, y: 0, z: 18}

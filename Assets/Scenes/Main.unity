@@ -825,7 +825,8 @@ MonoBehaviour:
   _waves:
   - {fileID: 11400000, guid: d9d94abe53c3c194fa2318a1a2d0f8fe, type: 2}
   - {fileID: 11400000, guid: a02d0959aded5124a87efa5b1fd2d5cc, type: 2}
-  - {fileID: 11400000, guid: d9d94abe53c3c194fa2318a1a2d0f8fe, type: 2}
+  - {fileID: 11400000, guid: 3bafb94b4cca0724fb6562f73e86473a, type: 2}
+  - {fileID: 11400000, guid: 66f66ab79c9ee64458e2ff9f2c03c829, type: 2}
   _currentEnemies: []
   _currentScore: 0
   _highScore: 0
