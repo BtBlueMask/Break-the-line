@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 2674c8a9555da1b4f9afc0872565eff4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8de480bfda8867a409d05af1ccb1dfa6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 2674c8a9555da1b4f9afc0872565eff4, type: 3}
@@ -156,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c309377a5730c489811930fbe521f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 500
+  speed: 1500
   damage: 1
   lifetime: 3
 --- !u!65 &7740015111005622870
