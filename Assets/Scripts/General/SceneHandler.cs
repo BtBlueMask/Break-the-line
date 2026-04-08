@@ -19,7 +19,6 @@ public class SceneHanler : MonoBehaviour
 
     public void LoadGameplay()
     {
-        Debug.Log("gameplayPressed");
         SceneManager.LoadScene("Main");
     }
 
@@ -37,5 +36,4 @@ public class SceneHanler : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
