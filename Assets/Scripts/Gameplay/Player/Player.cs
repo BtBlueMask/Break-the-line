@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
     private GameManager gameManager;
     private SceneHanler sceneHanler;
+    private ParticleManager particleManager;
 
     private HealthUI healthUI;
 
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
         healthUI = FindFirstObjectByType<HealthUI>();
         gameManager = FindAnyObjectByType<GameManager>();
         sceneHanler = FindAnyObjectByType<SceneHanler>();
+        particleManager = FindAnyObjectByType<ParticleManager>();
 
         #region Border
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 20));
@@ -96,12 +98,17 @@ public class Player : MonoBehaviour
         print("player died");
         gameManager.SaveScore();
         sceneHanler.LoadgameOver();
+        particleManager.StartFire(transform.position);
+        particleManager.StartSmoke(transform.position);
+        particleManager.StartFlash(transform.position);
+        particleManager.StartSpark(transform.position);
     }
 
     public void OnPlayerDamaged(int damage)
     {
         _Lifes -= damage;
         healthUI.onHealthChanged(_Lifes);
+        particleManager.StartSpark(transform.position);
     }
 
     #region Border

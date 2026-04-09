@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 75ba5b1c5f09fe84a969c2ccf60774de
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Spark: {fileID: 5404490636626670078, guid: 5dfdbcd79c32c9247ae446a12b57c123, type: 3}
+  - Fire: {fileID: 9128262533687896367, guid: d1fc1ba3411632946b431fc6ee2c87a1, type: 3}
+  - Flash: {fileID: 7022992235529500812, guid: 72bfea0830aa78c419e7bd984e1a0dd7, type: 3}
+  - Smoke: {fileID: 6029867683146423565, guid: 87ec3443dd218c6488e83bea6bb60ce7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
