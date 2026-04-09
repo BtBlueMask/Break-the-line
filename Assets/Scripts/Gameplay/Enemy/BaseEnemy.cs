@@ -14,6 +14,8 @@ public abstract class BaseEnemy : MonoBehaviour
 
     [SerializeField] protected float borderBuffer;
 
+    [SerializeField] protected int givenScore;
+
     #region Border
     protected float minX;
     protected float maxX;
@@ -92,6 +94,7 @@ public abstract class BaseEnemy : MonoBehaviour
     /// </summary>
     protected virtual void OnProjectiletHit(Projectile projectile)
     {
+        manager.UpdateScore(givenScore);
         OnDeath();
     }
 
