@@ -29,4 +29,12 @@ public class ParticleManager : MonoBehaviour
         Instantiate(Smoke, StartPos, Quaternion.Euler(0, 0, 0));
     }
 
+    public void Explosion(Vector3 StartPos)
+    {
+        StartSpark(StartPos);
+        StartFire(StartPos);
+        StartFlash(StartPos);
+        StartSmoke(StartPos);
+    }
+
 }

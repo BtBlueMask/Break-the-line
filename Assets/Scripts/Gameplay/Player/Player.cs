@@ -98,10 +98,7 @@ public class Player : MonoBehaviour
         print("player died");
         gameManager.SaveScore();
         sceneHanler.LoadgameOver();
-        particleManager.StartFire(transform.position);
-        particleManager.StartSmoke(transform.position);
-        particleManager.StartFlash(transform.position);
-        particleManager.StartSpark(transform.position);
+        particleManager.Explosion(transform.position);
     }
 
     public void OnPlayerDamaged(int damage)
