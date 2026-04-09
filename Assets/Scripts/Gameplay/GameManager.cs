@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    
+    [SerializeField] TextMeshProUGUI scoreLabel;
 
     [SerializeField] List<Wave> _waves = new List<Wave>();
     [SerializeField] List<GameObject> _currentEnemies = new List<GameObject>();
@@ -19,13 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        scoreLabel.text = "Score: " + 0;
     }
+
     void Start()
     {
         RestartGame();
     }
-
 
     void Update()
     {
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         _currentScore += scoreToAdd;
+        scoreLabel.text = "Score: " + _currentScore.ToString();
     }
     private void ResetRoundAndScore()
     {
