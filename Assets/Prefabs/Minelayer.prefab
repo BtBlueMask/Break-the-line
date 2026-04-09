@@ -103,6 +103,7 @@ MonoBehaviour:
   entrySpeed: -2
   entryTargetZ: 10
   borderBuffer: 0
+  givenScore: 250
   mine: {fileID: 7937588314448227950, guid: e561ee357c88d3f4485d0e9698f732c8, type: 3}
   mineSpawner: {fileID: 7879209419596818857}
   mineDeployCooldownMax: 2.5

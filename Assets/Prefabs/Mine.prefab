@@ -71,9 +71,9 @@ MonoBehaviour:
   entrySpeed: -0.75
   entryTargetZ: 10
   borderBuffer: 0
+  givenScore: 50
   thisCollider: {fileID: 851068003494037458}
   moveSpeed: -0.75
-  rotationDecider: 0
   rotationDirection: 0
   rotationSpeed: 20
   blastRadius: 3

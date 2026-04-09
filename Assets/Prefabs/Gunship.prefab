@@ -135,6 +135,7 @@ MonoBehaviour:
   entrySpeed: -4
   entryTargetZ: 7
   borderBuffer: 1
+  givenScore: 500
   _ShootingCD: 2
   enemyBullet: {fileID: 6731327242478059354, guid: 0a6b54324241b7743bfe3d7f927f3f96, type: 3}
   gun1: {fileID: 2083519784183097512}

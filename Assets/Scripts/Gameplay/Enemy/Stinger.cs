@@ -73,6 +73,7 @@ public class Stinger : BaseEnemy
     protected override void OnPlayerHit(Player player)
     {
         player.OnPlayerDamaged(1);
+        manager.UpdateScore(givenScore);
     }
 
     protected override void OnProjectiletHit(Projectile projectile)

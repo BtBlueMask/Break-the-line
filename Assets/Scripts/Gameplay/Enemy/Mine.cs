@@ -42,6 +42,7 @@ public class Mine : BaseEnemy
     {
         Debug.Log("The player was hit");
         player.OnPlayerDamaged(damage);
+        manager.UpdateScore(givenScore);
         MineExplode();
         OnDeath();
     }
@@ -49,7 +50,7 @@ public class Mine : BaseEnemy
     protected override void OnProjectiletHit(Projectile projectile)
     {
         MineExplode();
-        OnDeath();
+        base.OnProjectiletHit(projectile);
     }
 
     private void OnDrawGizmosSelected()

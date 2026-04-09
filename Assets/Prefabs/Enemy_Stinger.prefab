@@ -78,6 +78,7 @@ MonoBehaviour:
   entrySpeed: -4
   entryTargetZ: 7
   borderBuffer: 0
+  givenScore: 750
   _Phase: 0
   _RotationDuration: 1
   _MoveSpeed: -16

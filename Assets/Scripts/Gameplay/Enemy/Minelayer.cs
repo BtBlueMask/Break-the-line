@@ -31,11 +31,12 @@ public class Minelayer : BaseEnemy
     {
         Debug.Log("The player was hit");
         player.OnPlayerDamaged(damage);
+        manager.UpdateScore(givenScore);
         OnDeath();
     }
 
     protected override void OnProjectiletHit(Projectile projectile)
     {
-        OnDeath();
+        base.OnProjectiletHit(projectile);
     }
 }
