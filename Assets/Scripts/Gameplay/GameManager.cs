@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
-    private void UpdateScore(int scoreToAdd)
+    public void UpdateScore(int scoreToAdd)
     {
         _currentScore += scoreToAdd;
     }
